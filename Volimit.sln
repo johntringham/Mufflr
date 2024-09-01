@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volimit", "Volimit\Volimit.csproj", "{498E44D7-6186-41B2-BB30-41308C8B7CEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volimit.Desktop", "Volimit.Desktop\Volimit.Desktop.csproj", "{B25E459B-40A1-40AD-A3CF-568DB8D9DFCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{498E44D7-6186-41B2-BB30-41308C8B7CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498E44D7-6186-41B2-BB30-41308C8B7CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498E44D7-6186-41B2-BB30-41308C8B7CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498E44D7-6186-41B2-BB30-41308C8B7CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25E459B-40A1-40AD-A3CF-568DB8D9DFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25E459B-40A1-40AD-A3CF-568DB8D9DFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25E459B-40A1-40AD-A3CF-568DB8D9DFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25E459B-40A1-40AD-A3CF-568DB8D9DFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4BF77B1-098E-444C-9739-2609899C51F3}
+	EndGlobalSection
+EndGlobal
