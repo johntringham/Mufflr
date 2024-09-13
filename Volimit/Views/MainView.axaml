@@ -11,8 +11,22 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="SliderBackground">#33000000</SolidColorBrush>
+	</UserControl.Resources>
+
+	<UserControl.Styles>
+		<Style Selector="ProgressBar">
+			<Setter Property="Background" Value="{DynamicResource SliderBackground}"/>
+		</Style>
+		<Style Selector="Slider">
+			<Setter Property="Background" Value="{DynamicResource SliderBackground}"/>
+			<Setter Property="Height" Value="20"/>
+		</Style>
+	</UserControl.Styles>
+	
 	<Grid>
-		<StackPanel Orientation="Horizontal"
+		<StackPanel Orientation="Vertical"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center">
 
@@ -20,7 +34,7 @@
 				<ProgressBar Minimum="0"
 							 Maximum="1"
 							 Value="{Binding WasapiVolume}"
-							 Orientation="Vertical"
+							 Orientation="Horizontal"
 							 Width="20"/>
 				<TextBlock Text="Wasapi Volume"/>
 			</StackPanel>
@@ -28,40 +42,50 @@
 			<StackPanel Orientation="Vertical" Margin="10">
 				<ProgressBar Minimum="0"
 							 Maximum="1"
-						 Value="{Binding SystemVolume}"
-						 Orientation="Vertical"
-						 
-						 Width="20"/>
-				<TextBlock Text="Actual Volume"/>
+							 Value="{Binding SystemVolume}"
+							 Orientation="Horizontal"
+							 Width="20"/>
+				<TextBlock Text="System Volume"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Vertical" Margin="10">
 				<ProgressBar Minimum="0"
 							 Maximum="1"
-						 Value="{Binding ScaledWasapi}"
-						 Orientation="Vertical"
+							 Value="{Binding ScaledWasapi}"
+							 Orientation="Horizontal"
 						 
 						 Width="20"/>
 				<TextBlock Text="Scaled"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Vertical" Margin="10">
-				<Slider Orientation="Vertical"
-						Height="200"
+				<Slider Minimum="0"
+					    Maximum="1"
+						Value="{Binding IntendedVolume}"
+						Width="200">
+					<Slider.Resources>
+						<CornerRadius x:Key="SliderThumbCornerRadius">5</CornerRadius>
+						<x:Double x:Key="SliderHorizontalThumbWidth">10</x:Double>
+						<x:Double x:Key="SliderHorizontalHeight">34</x:Double>
+						<x:Double x:Key="SliderTrackThemeHeight">4</x:Double>
+					</Slider.Resources>
+				</Slider>
+				<TextBlock Text="Intended Volume"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Vertical" Margin="10 0 10 10">
+				<Slider Width="200"
 						Minimum="0"
 						Maximum="1"
 						Value="{Binding VolumeCap}">
+					<Slider.Resources>
+						<CornerRadius x:Key="SliderThumbCornerRadius">5</CornerRadius>
+						<x:Double x:Key="SliderHorizontalThumbWidth">10</x:Double>
+						<x:Double x:Key="SliderHorizontalHeight">34</x:Double>
+						<x:Double x:Key="SliderTrackThemeHeight">4</x:Double>
+					</Slider.Resources>
 				</Slider>
 				<TextBlock Text="Volume Cap"/>
-			</StackPanel>
-
-			<StackPanel Orientation="Vertical" Margin="10">
-				<ProgressBar Minimum="0"
-							 Maximum="1"
-						 Value="{Binding IntendedVolume}"
-						 Orientation="Vertical"
-						 Width="20"/>
-				<TextBlock Text="Intended Volume"/>
 			</StackPanel>
 		</StackPanel>
 	</Grid>
