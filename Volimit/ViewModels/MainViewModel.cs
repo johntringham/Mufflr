@@ -19,7 +19,7 @@ public partial class MainViewModel : ViewModelBase
 
     public float VolumeCap { get; set; } = 0.1f;
 
-    public float BounceBackRate { get; set; } = 0.01f;
+    public float BounceBackRate { get; set; } = 0.1f;
 
     private Task MainLoopTask;
 
@@ -32,6 +32,13 @@ public partial class MainViewModel : ViewModelBase
         this.VolumeReader.VolumeChanged += OnDesktopAudioHeard;
 
         this.MainLoopTask = RunMainLoop();
+        this.VolumeSettings.VolumeSetByUser += this.OnUserSetVolume;
+    }
+
+    private void OnUserSetVolume(object? sender, EventArgs e)
+    {
+        this.IntendedVolume = VolumeSettings.UserSetVolume;
+        this.OnPropertyChanged(nameof(this.IntendedVolume));
     }
 
     private async Task? RunMainLoop()
@@ -46,7 +53,7 @@ public partial class MainViewModel : ViewModelBase
 
     private void Tick()
     {
-        this.SystemVolume = VolumeSettings.GetCurrentSystemVolume() ?? 0;
+        this.SystemVolume = VolumeSettings.PollCurrentSystemVolume() ?? 0;
         this.OnPropertyChanged(nameof(SystemVolume));
 
         this.ScaledWasapi = this.WasapiVolume * this.SystemVolume;
@@ -59,7 +66,7 @@ public partial class MainViewModel : ViewModelBase
                 var newScaledSystemVolume = VolumeCap / WasapiVolume;
                 VolumeSettings.SetSystemVolume(newScaledSystemVolume);
             }
-            else if (this.SystemVolume < this.IntendedVolume)
+            else if (!this.SystemVolume.IsCloseTo(this.IntendedVolume))
             {
                 var diff = this.IntendedVolume - this.SystemVolume;
                 var increase = diff * this.BounceBackRate;
@@ -67,9 +74,6 @@ public partial class MainViewModel : ViewModelBase
                 VolumeSettings.SetSystemVolume(this.SystemVolume + increase);
             }
         }
-
-        this.IntendedVolume = VolumeSettings.UserSetVolume;
-        this.OnPropertyChanged(nameof(this.IntendedVolume));
     }
 
     private bool InUserInputCooldown()

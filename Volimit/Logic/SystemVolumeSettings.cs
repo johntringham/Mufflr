@@ -14,9 +14,11 @@ namespace Volimit.Logic
     {
         public MMDevice? DefaultDevice { get; private set; }
 
-        public float? CurrentSystemVolume => GetCurrentSystemVolume();
+        public float? CurrentSystemVolume => PollCurrentSystemVolume();
 
         private float? lastSetVolume = null;
+
+        public event EventHandler<EventArgs> VolumeSetByUser;
 
         public float UserSetVolume { get; private set; }
         public DateTime? UserSetTime { get; private set; }
@@ -38,7 +40,7 @@ namespace Volimit.Logic
             }
         }
 
-        public float? GetCurrentSystemVolume()
+        public float? PollCurrentSystemVolume()
         {
             var devEnum = new MMDeviceEnumerator();
             this.DefaultDevice = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
@@ -54,6 +56,8 @@ namespace Volimit.Logic
                 {
                     UserSetVolume = masterVolumePercent;
                     lastSetVolume = masterVolumePercent;
+
+                    RaiseUserVolumeSetByUser();
                 }
 
                 if (lastSetVolume != null && !lastSetVolume.Value.IsCloseTo(masterVolumePercent))
@@ -62,12 +66,19 @@ namespace Volimit.Logic
 
                     this.UserSetVolume = masterVolumePercent;
                     this.lastSetVolume = UserSetVolume;
+
+                    RaiseUserVolumeSetByUser();
                 }
 
                 return masterVolumePercent;
             }
 
             return null;
+        }
+
+        private void RaiseUserVolumeSetByUser()
+        {
+            this.VolumeSetByUser?.Invoke(this, new EventArgs());
         }
 
         public void SetSystemVolume(float volume)
