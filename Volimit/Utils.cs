@@ -12,5 +12,16 @@ namespace Volimit
         {
             return Math.Abs(x - y) < epsilon;
         }
+
+        // Framerate independant lerping
+        public static float Damp(float current, float target, float lambda, float dt)
+        {
+            return Lerp(current, target, 1 - MathF.Exp(-lambda * dt));
+        }
+
+        public static float Lerp(float a, float b, float t)
+        {
+            return (b - a) * t + a;
+        }
     }
 }

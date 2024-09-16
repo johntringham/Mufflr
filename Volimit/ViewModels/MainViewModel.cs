@@ -6,10 +6,11 @@ namespace Volimit.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public string Greeting => "Welcome to Avalonia!";
-
+    public bool IsRunning { get; set; } = true;
     public float WasapiVolume { get; set; }
     public float SystemVolume { get; set; }
+    
+    public float ScaledWasapiIfNoCapping { get; set; }
     public float ScaledWasapi { get; set; }
 
     public float IntendedVolume { get; set; }
@@ -17,11 +18,13 @@ public partial class MainViewModel : ViewModelBase
     public DesktopVolumeReader VolumeReader { get; set; }
     public SystemVolumeSettings VolumeSettings { get; set; }
 
-    public float VolumeCap { get; set; } = 0.1f;
+    public float VolumeCap { get; set; } = 0.2f;
 
-    public float BounceBackRate { get; set; } = 0.1f;
+    public float BounceBackRate { get; set; } = 5f;
 
     private Task MainLoopTask;
+
+    private DateTime lastTickTime = DateTime.Now;
 
     public TimeSpan UserInputWaitTime { get; set; } = TimeSpan.FromSeconds(2);
 
@@ -33,6 +36,8 @@ public partial class MainViewModel : ViewModelBase
 
         this.MainLoopTask = RunMainLoop();
         this.VolumeSettings.VolumeSetByUser += this.OnUserSetVolume;
+
+        this.IntendedVolume = this.VolumeSettings.CurrentSystemVolume ?? 0.3f;
     }
 
     private void OnUserSetVolume(object? sender, EventArgs e)
@@ -45,9 +50,15 @@ public partial class MainViewModel : ViewModelBase
     {
         while (true)
         {
-            Tick();
-
-            await Task.Delay(1);
+            if (IsRunning)
+            {
+                Tick();
+                await Task.Delay(1);
+            }
+            else
+            {
+                await Task.Delay(100);
+            }
         }
     }
 
@@ -57,7 +68,9 @@ public partial class MainViewModel : ViewModelBase
         this.OnPropertyChanged(nameof(SystemVolume));
 
         this.ScaledWasapi = this.WasapiVolume * this.SystemVolume;
+        this.ScaledWasapiIfNoCapping = this.WasapiVolume * this.IntendedVolume;
         this.OnPropertyChanged(nameof(this.ScaledWasapi));
+        this.OnPropertyChanged(nameof(this.ScaledWasapiIfNoCapping));
 
         if (!InUserInputCooldown())
         {
@@ -68,12 +81,14 @@ public partial class MainViewModel : ViewModelBase
             }
             else if (!this.SystemVolume.IsCloseTo(this.IntendedVolume))
             {
-                var diff = this.IntendedVolume - this.SystemVolume;
-                var increase = diff * this.BounceBackRate;
+                var dt = (float)(DateTime.Now - lastTickTime).TotalSeconds; // todo: is double better?
+                var lerpedVolume = Utils.Damp(this.SystemVolume, this.IntendedVolume, this.BounceBackRate, dt);
 
-                VolumeSettings.SetSystemVolume(this.SystemVolume + increase);
+                VolumeSettings.SetSystemVolume(lerpedVolume);
             }
         }
+
+        lastTickTime = DateTime.Now;
     }
 
     private bool InUserInputCooldown()
