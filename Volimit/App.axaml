@@ -1,9 +1,11 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="Volimit.App"
-             RequestedThemeVariant="Dark">
+             xmlns:local="using:Volimit"
+			 x:Class="Volimit.App"
+             RequestedThemeVariant="Dark"
+			 Name="TheApp">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+	
     <Application.Styles>
 		<FluentTheme>
 			<FluentTheme.Palettes>
@@ -14,8 +16,31 @@
 			</FluentTheme.Palettes>
 		</FluentTheme>
     </Application.Styles>
+	
 	<Application.Resources>
 		<FontFamily x:Key="Solitus">avares://Volimit/Assets/Fonts#Solitus</FontFamily>
 		<FontFamily x:Key="OverusedGrotesk">avares://Volimit/Assets/Fonts#Overused Grotesk</FontFamily>
 	</Application.Resources>
+
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon Icon="/Assets/avalonia-logo.ico"
+					  ToolTipText="Mufflr - Loud noise protection">
+				<TrayIcon.Command>
+					<local:ShowMainWindowCommand/>
+				</TrayIcon.Command>
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="Show main window"/>
+						<NativeMenuItemSeparator />
+						<NativeMenuItem Header="Exit">
+							<NativeMenuItem.Command>
+								<local:ExitCommand/>
+							</NativeMenuItem.Command>
+						</NativeMenuItem>
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
 </Application>
