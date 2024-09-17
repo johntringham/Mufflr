@@ -14,4 +14,8 @@
 			</FluentTheme.Palettes>
 		</FluentTheme>
     </Application.Styles>
+	<Application.Resources>
+		<FontFamily x:Key="Solitus">avares://Volimit/Assets/Fonts#Solitus</FontFamily>
+		<FontFamily x:Key="OverusedGrotesk">avares://Volimit/Assets/Fonts#Overused Grotesk</FontFamily>
+	</Application.Resources>
 </Application>
