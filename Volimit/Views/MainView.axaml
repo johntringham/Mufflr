@@ -15,7 +15,6 @@
 
 	<UserControl.Resources>
 		<SolidColorBrush x:Key="SliderBackground">#33000000</SolidColorBrush>
-		
 		<SolidColorBrush x:Key="StandardSliderColour">#ff7daafb</SolidColorBrush>
 		<SolidColorBrush x:Key="ClippedSliderColour">#ffff4343</SolidColorBrush>
 		<SolidColorBrush x:Key="BackgroundColour">#ff292d3e</SolidColorBrush>
@@ -67,7 +66,7 @@
 					VerticalAlignment="Center"
 					FontWeight="Black"
 					FontSize="20"
-					Margin="10 0 0 0"/>
+					Margin="5 0 0 0"/>
 				<ToggleSwitch 
 					Grid.Column="1"
 					IsChecked="{Binding IsRunning}"
@@ -105,7 +104,7 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Vertical" Classes="RowStack"
-							ToolTip.Tip="The actual volume Windows is set to. This changes automatically to reduce any loud sounds that go above the loudness cap.">
+							ToolTip.Tip="The actual volume Windows is set to. This is adjusted automatically to be the same as the Intended Volume, but is automatically reduced whenever there is loud audio that goes above the loudness cap.">
 					<!-- These are sliders that do not allow the user to slide. They are meant to be ProgressBars that aren't editable.
 						I know it's weird, but its mainly just to get the styling consistent between each bar without having to do loads of annoying stuff.
 					-->
@@ -148,7 +147,7 @@
 						<TextBox Grid.Column="1" Text="{Binding #CapSlider.Value, StringFormat=f2}" Classes="EditableText"/>
 					</Grid>
 				</StackPanel>
-				
+
 				<StackPanel Orientation="Vertical" Classes="RowStack"
 							ToolTip.Tip="The current loudness of the audio being played. Red values indicate that the loudness cap was hit, and the volume automatically reduced.">
 					<Grid>
@@ -171,20 +170,18 @@
 								 Value="{Binding ScaledWasapi}"
 								 Orientation="Horizontal"
 								 Classes="NonEditableSlider">
-						<Slider.Resources>
-							<CornerRadius x:Key="SliderThumbCornerRadius">5</CornerRadius>
-							<x:Double x:Key="SliderHorizontalThumbWidth">0</x:Double>
-							<x:Double x:Key="SliderHorizontalHeight">34</x:Double>
-							<x:Double x:Key="SliderTrackThemeHeight">4</x:Double>
-						</Slider.Resources>
-					</Slider>
-				
+							<Slider.Resources>
+								<CornerRadius x:Key="SliderThumbCornerRadius">5</CornerRadius>
+								<x:Double x:Key="SliderHorizontalThumbWidth">0</x:Double>
+								<x:Double x:Key="SliderHorizontalHeight">34</x:Double>
+								<x:Double x:Key="SliderTrackThemeHeight">4</x:Double>
+							</Slider.Resources>
+						</Slider>
+
 					</Grid>
-					
+
 					<TextBlock Text="Current loudness"/>
 				</StackPanel>
-
-				
 			</StackPanel>
 		</StackPanel>
 	</Grid>

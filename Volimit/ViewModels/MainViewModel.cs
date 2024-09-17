@@ -22,22 +22,27 @@ public partial class MainViewModel : ViewModelBase
 
     public float BounceBackRate { get; set; } = 5f;
 
-    private Task MainLoopTask;
+    public Task MainLoopTask;
 
     private DateTime lastTickTime = DateTime.Now;
 
     public TimeSpan UserInputWaitTime { get; set; } = TimeSpan.FromSeconds(2);
 
+    private Settings settings;
+
     public MainViewModel()
     {
+        this.settings = SettingsManager.GetSettings();
+
+        this.VolumeCap = settings.VolumeCap;
+
         this.VolumeReader = new DesktopVolumeReader();
         this.VolumeSettings = new SystemVolumeSettings();
         this.VolumeReader.VolumeChanged += OnDesktopAudioHeard;
+        this.IntendedVolume = this.VolumeSettings.CurrentSystemVolume ?? 0.3f;
 
         this.MainLoopTask = RunMainLoop();
         this.VolumeSettings.VolumeSetByUser += this.OnUserSetVolume;
-
-        this.IntendedVolume = this.VolumeSettings.CurrentSystemVolume ?? 0.3f;
     }
 
     private void OnUserSetVolume(object? sender, EventArgs e)
@@ -46,18 +51,22 @@ public partial class MainViewModel : ViewModelBase
         this.OnPropertyChanged(nameof(this.IntendedVolume));
     }
 
-    private async Task? RunMainLoop()
+    private async Task RunMainLoop()
     {
         while (true)
         {
             if (IsRunning)
             {
                 Tick();
-                await Task.Delay(1);
+                await Task.Delay(1); // Needs to be low latency
             }
             else
             {
-                await Task.Delay(100);
+                // Not running, can be slower
+                await Task.Delay(100); 
+
+                // It would be better to just end this task and restart it when the on/off switch is turned back
+                // on, but this lazy hack is easier.
             }
         }
     }
@@ -100,5 +109,11 @@ public partial class MainViewModel : ViewModelBase
     {
         this.WasapiVolume = VolumeReader.CurrentWasapiVolume;
         this.OnPropertyChanged(nameof(WasapiVolume));
+    }
+
+    internal void OnUnloaded()
+    {
+        this.settings.VolumeCap = VolumeCap;
+        SettingsManager.SaveSettings(this.settings);
     }
 }
