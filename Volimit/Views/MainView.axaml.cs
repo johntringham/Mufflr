@@ -14,9 +14,5 @@ public partial class MainView : UserControl
     protected override void OnUnloaded(RoutedEventArgs e)
     {
         base.OnUnloaded(e);
-
-        var viewModel = (MainViewModel)this.DataContext;
-
-        viewModel.OnUnloaded();
     }
 }

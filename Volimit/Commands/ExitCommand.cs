@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Volimit.ViewModels;
 
 namespace Volimit
 {
@@ -28,6 +29,9 @@ namespace Volimit
         {
             if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                var mainViewModel = desktop.MainWindow.DataContext as MainViewModel;
+                mainViewModel.OnExit();
+
                 desktop.Shutdown();
             }
         }

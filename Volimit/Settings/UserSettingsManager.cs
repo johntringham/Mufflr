@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Volimit
 {
-    internal class SettingsManager
+    internal class UserSettingsManager
     {
         private static string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static string settingsFolder = Path.Combine(appDataPath, "mufflr");
