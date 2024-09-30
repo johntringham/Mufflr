@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Avalonia;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -11,6 +15,10 @@ namespace Volimit
 {
     internal class UserSettingsManager
     {
+        private const string startupRegistryKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+        const string autoStartupRegKeyName = "Mufflr desktop";
+
+
         private static string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static string settingsFolder = Path.Combine(appDataPath, "mufflr");
         private static string fileName = "settings.xml";
@@ -61,6 +69,29 @@ namespace Volimit
             var writer = new StreamWriter(fullPath);
             serializer.Serialize(writer, settings);
             writer.Close();
+        }
+
+        internal static void SetAutoStartup(bool value)
+        {
+            var executingPath = Process.GetCurrentProcess().MainModule.FileName;
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(startupRegistryKey, true);
+
+            if (value)
+            {
+                rk.SetValue(autoStartupRegKeyName, executingPath);
+            }
+            else
+            {
+                rk.DeleteValue(autoStartupRegKeyName, false);
+            }
+        }
+
+        internal static bool IsAutoStartup()
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(startupRegistryKey, true);
+            var regValue = rk.GetValue(autoStartupRegKeyName, null);
+
+            return (regValue != null);
         }
     }
 }

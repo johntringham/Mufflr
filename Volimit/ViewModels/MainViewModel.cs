@@ -9,6 +9,15 @@ namespace Volimit.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     public bool IsRunning { get; set; } = true;
+
+    public bool RunAtStartupEnabled
+    {
+        get => UserSettingsManager.IsAutoStartup();
+        set
+        {
+            UserSettingsManager.SetAutoStartup(value);
+        }
+    }
     public float WasapiVolume => this.Manager?.WasapiVolume ?? 0f;
     public float SystemVolume => this.Manager?.SystemVolume ?? 0f;
 
@@ -42,6 +51,7 @@ public partial class MainViewModel : ViewModelBase
 
     private float intendedVolume;
     private float volumeCap = 0.2f;
+    private bool runAtStartupEnabled = false;
 
     public MainViewModel()
     {

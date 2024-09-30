@@ -1,6 +1,8 @@
 ﻿using System;
-
+using System.ComponentModel.DataAnnotations;
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Volimit.Views;
 
 namespace Volimit.Desktop;
 
@@ -10,8 +12,19 @@ class Program
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
     [STAThread]
-    public static void Main(string[] args) => BuildAvaloniaApp()
-        .StartWithClassicDesktopLifetime(args);
+    public static void Main(string[] args)
+    {
+        var appBuilder = BuildAvaloniaApp();
+
+        appBuilder.AfterSetup((a) =>
+        {
+            var exeLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
+            var lifetime = a.Instance.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+            var window = lifetime.MainWindow as MainWindow;
+        });
+
+        var res = appBuilder.StartWithClassicDesktopLifetime(args);
+    }
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()

@@ -47,7 +47,7 @@
 			<Setter Property="MinHeight" Value="0"/>
 		</Style>
 		<Style Selector="StackPanel.RowStack">
-			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Margin" Value="1"/>
 		</Style>
 	</UserControl.Styles>
 	
@@ -181,6 +181,10 @@
 					</Grid>
 
 					<TextBlock Text="Current loudness"/>
+				</StackPanel>
+				
+				<StackPanel Orientation="Vertical" Classes="RowStack">
+					<CheckBox FontSize="15" HorizontalAlignment="Center" Margin="0 15 0 0" IsChecked="{Binding RunAtStartupEnabled}">Run at startup</CheckBox>
 				</StackPanel>
 			</StackPanel>
 		</StackPanel>
