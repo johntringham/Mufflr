@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:Volimit.Views"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
         x:Class="Volimit.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/attempt4.ico"
         Title="Volimit"
 		Width="300"
 		Height="300"

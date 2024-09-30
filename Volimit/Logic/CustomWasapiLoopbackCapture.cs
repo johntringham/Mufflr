@@ -48,5 +48,3 @@ public class CustomWasapiLoopbackCapture : WasapiCapture
         return AudioClientStreamFlags.Loopback | base.GetAudioClientStreamFlags();
     }
 }
-    
-

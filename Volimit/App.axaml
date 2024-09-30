@@ -24,7 +24,7 @@
 
 	<TrayIcon.Icons>
 		<TrayIcons>
-			<TrayIcon Icon="/Assets/avalonia-logo.ico"
+			<TrayIcon Icon="/Assets/attempt5.png"
 					  ToolTipText="Mufflr - Loud noise protection">
 				<TrayIcon.Command>
 					<local:ShowMainWindowCommand/>

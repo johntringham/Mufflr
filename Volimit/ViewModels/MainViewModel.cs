@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Volimit.Logic;
 
@@ -30,19 +31,34 @@ public partial class MainViewModel : ViewModelBase
 
     private Settings settings;
 
+
     public MainViewModel()
     {
         this.settings = SettingsManager.GetSettings();
 
         this.VolumeCap = settings.VolumeCap;
 
-        this.VolumeReader = new DesktopVolumeReader();
         this.VolumeSettings = new SystemVolumeSettings();
-        this.VolumeReader.VolumeChanged += OnDesktopAudioHeard;
-        this.IntendedVolume = this.VolumeSettings.CurrentSystemVolume ?? 0.3f;
+
+        this.VolumeSettings.DefaultDeviceChanged += OnDefaultDeviceChanged;
+
+        StartVolumeReader();
 
         this.MainLoopTask = RunMainLoop();
         this.VolumeSettings.VolumeSetByUser += this.OnUserSetVolume;
+    }
+
+    private void StartVolumeReader()
+    {
+        this.VolumeReader = new DesktopVolumeReader();
+        this.VolumeReader.VolumeChanged += OnDesktopAudioHeard;
+        this.IntendedVolume = this.VolumeSettings.CurrentSystemVolume ?? 0.3f;
+    }
+
+    private void OnDefaultDeviceChanged(object? sender, EventArgs e)
+    {
+        this.VolumeReader.VolumeChanged -= OnDesktopAudioHeard;
+        StartVolumeReader();
     }
 
     private void OnUserSetVolume(object? sender, EventArgs e)
@@ -58,6 +74,8 @@ public partial class MainViewModel : ViewModelBase
             if (IsRunning)
             {
                 Tick();
+
+                // todo: is await the right thing to do here. should this just be another thread and have a thread.sleep
                 await Task.Delay(1); // Needs to be low latency
             }
             else
@@ -111,6 +129,7 @@ public partial class MainViewModel : ViewModelBase
         this.OnPropertyChanged(nameof(WasapiVolume));
     }
 
+    //TODO: this doesn't work now that we're systray based
     internal void OnUnloaded()
     {
         this.settings.VolumeCap = VolumeCap;
