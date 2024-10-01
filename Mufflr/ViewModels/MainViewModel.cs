@@ -80,6 +80,7 @@ public partial class MainViewModel : ViewModelBase
         this.OnPropertyChanged(nameof(SystemVolume));
         this.OnPropertyChanged(nameof(ScaledWasapiIfNoCapping));
         this.OnPropertyChanged(nameof(ScaledWasapi));
+        this.OnPropertyChanged(nameof(IsRunning));
     }
 
     internal void OnExit()

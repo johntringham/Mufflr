@@ -24,9 +24,7 @@ namespace Mufflr
 
         public float VolumeCap { get; set; } = 0.2f;
 
-        public float BounceBackRate { get; set; } = 1f;
-
-        public Task MainLoopTask;
+        public float BounceBackRate { get; set; } = 2f;
 
         private DateTime lastTickTime = DateTime.Now;
         private DateTime lastUpdateTime = DateTime.Now;
@@ -93,26 +91,22 @@ namespace Mufflr
 
         private void MainLoop()
         {
-            //while (true)
-            //{
-            //    cts.ThrowIfCancellationRequested();
+            // this is called at 30fps to run even when we dont pick up sounds from the desktop
+            // for (eg.) setting system volume when intended is changing
+            while (true)
+            {
+                cts.ThrowIfCancellationRequested();
 
-            //    if (IsRunning)
-            //    {
-            //        Tick();
-
-            //        //Thread.Sleep(TimeSpan.Zero); // Needs to be low latency
-            //        Thread.Sleep(TimeSpan.FromTicks(1)); // Needs to be low latency
-            //    }
-            //    else
-            //    {
-            //        // Not running, can be slower
-            //        Thread.Sleep(TimeSpan.FromSeconds(0.1));
-
-            //        // It would be better to just end this task and restart it when the on/off switch is turned back
-            //        // on, but this lazy hack is easier.
-            //    }
-            //}
+                if (IsRunning)
+                {
+                    Tick();
+                    Thread.Sleep(TimeSpan.FromSeconds(1f/30f));
+                }
+                else
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(0.1));
+                }
+            }
         }
 
         private void Tick()

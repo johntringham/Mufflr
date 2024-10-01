@@ -19,7 +19,6 @@ class Program
 
         appBuilder.AfterSetup((a) =>
         {
-            var exeLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
             var lifetime = a.Instance.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
             var window = lifetime.MainWindow as MainWindow;
         });
