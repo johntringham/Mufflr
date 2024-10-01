@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Volimit.Logic;
+namespace Mufflr.Logic;
 
-public class CustomWasapiLoopbackCapture : WasapiCapture
+public class CustomWasapiLoopbackCapture : CustomWasapiCapture
 {
     //
     // Summary:
     //     Initialises a new instance of the WASAPI capture class
-    public CustomWasapiLoopbackCapture(int bufferTimeMs)
-        : this(GetDefaultLoopbackCaptureDevice(), bufferTimeMs)
+    public CustomWasapiLoopbackCapture(int bufferTimeMicroseconds)
+        : this(GetDefaultLoopbackCaptureDevice(), bufferTimeMicroseconds)
     {
     }
 
@@ -24,8 +24,8 @@ public class CustomWasapiLoopbackCapture : WasapiCapture
     // Parameters:
     //   captureDevice:
     //     Capture device to use
-    public CustomWasapiLoopbackCapture(MMDevice captureDevice, int bufferTimeMs)
-        : base(captureDevice, false, bufferTimeMs)
+    public CustomWasapiLoopbackCapture(MMDevice captureDevice, int bufferTimeMicroseconds)
+        : base(captureDevice, false, bufferTimeMicroseconds)
     {
     }
 

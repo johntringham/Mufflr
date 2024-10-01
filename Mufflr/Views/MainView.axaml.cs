@@ -1,8 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Volimit.ViewModels;
+using Mufflr.ViewModels;
 
-namespace Volimit.Views;
+namespace Mufflr.Views;
 
 public partial class MainView : UserControl
 {

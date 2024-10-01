@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Volimit
+namespace Mufflr
 {
     internal class UserSettingsManager
     {

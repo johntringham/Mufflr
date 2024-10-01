@@ -4,11 +4,11 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using System;
 using System.Windows.Input;
-using Volimit.Commands;
-using Volimit.ViewModels;
-using Volimit.Views;
+using Mufflr.Commands;
+using Mufflr.ViewModels;
+using Mufflr.Views;
 
-namespace Volimit;
+namespace Mufflr;
 
 public partial class App : Application
 {

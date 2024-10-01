@@ -5,25 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Volimit.Commands
+namespace Mufflr.Commands
 {
-    internal class TurnOnCommand : ICommand
+    internal class ActionCommand : ICommand
     {
-        public TurnOnCommand()
+        private readonly Action action;
+
+        public ActionCommand(Action action)
         {
-            
+            this.action = action;
         }
 
         public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object? parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            this.action();
         }
     }
 }

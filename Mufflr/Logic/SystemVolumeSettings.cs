@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Volimit.Utils;
+using static Mufflr.Utils;
 
-namespace Volimit.Logic
+namespace Mufflr.Logic
 {
     public class SystemVolumeSettings
     {

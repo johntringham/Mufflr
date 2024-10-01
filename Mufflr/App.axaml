@@ -1,7 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:Volimit"
-			 x:Class="Volimit.App"
+             xmlns:local="using:Mufflr"
+			 x:Class="Mufflr.App"
              RequestedThemeVariant="Dark"
 			 Name="TheApp">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -18,8 +18,8 @@
     </Application.Styles>
 	
 	<Application.Resources>
-		<FontFamily x:Key="Solitus">avares://Volimit/Assets/Fonts#Solitus</FontFamily>
-		<FontFamily x:Key="OverusedGrotesk">avares://Volimit/Assets/Fonts#Overused Grotesk</FontFamily>
+		<FontFamily x:Key="Solitus">avares://Mufflr/Assets/Fonts#Solitus</FontFamily>
+		<FontFamily x:Key="OverusedGrotesk">avares://Mufflr/Assets/Fonts#Overused Grotesk</FontFamily>
 	</Application.Resources>
 
 	<TrayIcon.Icons>

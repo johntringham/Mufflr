@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 
-namespace Volimit.Logic;
+namespace Mufflr.Logic;
 public class DesktopVolumeReader
 {
     public float CurrentWasapiVolume { get; private set; }

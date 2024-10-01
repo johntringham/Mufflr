@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Volimit.ViewModels;
+using Mufflr.ViewModels;
 
-namespace Volimit
+namespace Mufflr
 {
     public class ExitCommand : ICommand
     {

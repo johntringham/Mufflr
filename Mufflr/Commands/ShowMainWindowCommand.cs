@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Volimit
+namespace Mufflr
 {
     internal class ShowMainWindowCommand : ICommand
     {

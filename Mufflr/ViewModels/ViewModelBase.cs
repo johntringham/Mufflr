@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Volimit.ViewModels;
+namespace Mufflr.ViewModels;
 
 public class ViewModelBase : ObservableObject
 {

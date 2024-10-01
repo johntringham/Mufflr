@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Volimit
+namespace Mufflr
 {
     [XmlRoot(ElementName = "Settings")]
     public class Settings

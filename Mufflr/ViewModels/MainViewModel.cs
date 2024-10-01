@@ -2,13 +2,13 @@
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using Volimit.Logic;
+using Mufflr.Logic;
 
-namespace Volimit.ViewModels;
+namespace Mufflr.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public bool IsRunning { get; set; } = true;
+    public bool IsRunning { get => this.Manager?.IsRunning ?? false; set => this.Manager.IsRunning = value; }
 
     public bool RunAtStartupEnabled
     {

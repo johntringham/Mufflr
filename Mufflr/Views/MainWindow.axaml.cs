@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using System;
 
-namespace Volimit.Views;
+namespace Mufflr.Views;
 
 public partial class MainWindow : Window
 {
@@ -19,10 +19,10 @@ public partial class MainWindow : Window
             e.Cancel = true;
         };
 
-        this.Deactivated += (s, e) =>
-        {
-            ((Window)s).Hide();
-        };
+        //this.Deactivated += (s, e) =>
+        //{
+        //    ((Window)s).Hide();
+        //};
 
         this.Loaded += this.OnLoaded;
     }

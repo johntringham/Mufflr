@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Volimit.Logic;
+using Mufflr.Logic;
 
-namespace Volimit
+namespace Mufflr
 {
     class VolumeLimitterManager
     {
@@ -24,7 +24,7 @@ namespace Volimit
 
         public float VolumeCap { get; set; } = 0.2f;
 
-        public float BounceBackRate { get; set; } = 5f;
+        public float BounceBackRate { get; set; } = 1f;
 
         public Task MainLoopTask;
 
@@ -93,30 +93,35 @@ namespace Volimit
 
         private void MainLoop()
         {
-            while (true)
-            {
-                cts.ThrowIfCancellationRequested();
+            //while (true)
+            //{
+            //    cts.ThrowIfCancellationRequested();
 
-                if (IsRunning)
-                {
-                    Tick();
+            //    if (IsRunning)
+            //    {
+            //        Tick();
 
-                    //Thread.Sleep(TimeSpan.Zero); // Needs to be low latency
-                    Thread.Sleep(TimeSpan.FromMilliseconds(0.1)); // Needs to be low latency
-                }
-                else
-                {
-                    // Not running, can be slower
-                    Thread.Sleep(TimeSpan.FromSeconds(0.1));
+            //        //Thread.Sleep(TimeSpan.Zero); // Needs to be low latency
+            //        Thread.Sleep(TimeSpan.FromTicks(1)); // Needs to be low latency
+            //    }
+            //    else
+            //    {
+            //        // Not running, can be slower
+            //        Thread.Sleep(TimeSpan.FromSeconds(0.1));
 
-                    // It would be better to just end this task and restart it when the on/off switch is turned back
-                    // on, but this lazy hack is easier.
-                }
-            }
+            //        // It would be better to just end this task and restart it when the on/off switch is turned back
+            //        // on, but this lazy hack is easier.
+            //    }
+            //}
         }
 
         private void Tick()
         {
+            if (!IsRunning)
+            {
+                return;
+            }
+
             this.SystemVolume = VolumeSettings.PollCurrentSystemVolume() ?? 0;
             this.ScaledWasapi = this.WasapiVolume * this.SystemVolume;
             this.ScaledWasapiIfNoCapping = this.WasapiVolume * this.IntendedVolume;
@@ -153,6 +158,7 @@ namespace Volimit
         private void OnDesktopAudioHeard(object? sender, System.EventArgs e)
         {
             this.WasapiVolume = VolumeReader.CurrentWasapiVolume;
+            this.Tick();
         }
 
         internal void SaveUserSettings()

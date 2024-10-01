@@ -2,9 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Volimit.Views;
+using Mufflr.Views;
 
-namespace Volimit.Desktop;
+
+namespace Mufflr.Desktop;
 
 class Program
 {
