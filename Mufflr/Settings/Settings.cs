@@ -13,5 +13,8 @@ namespace Mufflr
 
         [XmlElement(ElementName = "VolumeCap")]
         public float VolumeCap { get; set; } = 0.05f;
+
+        [XmlElement(ElementName = "ShowCloseNotifications")]
+        public bool ShowCloseNotifications { get; set; } = true;
     }
 }

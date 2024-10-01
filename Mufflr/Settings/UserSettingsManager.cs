@@ -11,7 +11,6 @@ namespace Mufflr
         private const string startupRegistryKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         const string autoStartupRegKeyName = "Mufflr desktop";
 
-
         private static string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static string settingsFolder = Path.Combine(appDataPath, "mufflr");
         private static string fileName = "settings.xml";

@@ -16,6 +16,6 @@
 	<!--ExtendClientAreaChromeHints="NoChrome"-->
 
 	<Border BorderBrush="Black" BorderThickness="2">
-        <views:MainView />
+        <views:MainView Name="MainViewObject" />
 	</Border>
 </Window>

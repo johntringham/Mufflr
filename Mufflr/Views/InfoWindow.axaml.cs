@@ -17,9 +17,7 @@ public partial class InfoWindow : Window
     {
         get
         {
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
-            return " v" + fvi.FileVersion;
+            return " v" + Assembly.GetExecutingAssembly().GetName().Version;
         }
     }
 }

@@ -32,7 +32,6 @@
 			<Setter Property="Background" Value="{DynamicResource SliderBackground}"/>
 			<Setter Property="Height" Value="20"/>
 			<Setter Property="Focusable" Value="False"/>
-			
 			<Setter Property="IsTabStop" Value="False"/>
 		</Style>
 		<Style Selector="TextBox.EditableText">
@@ -57,18 +56,20 @@
 					VerticalAlignment="Center">
 			<Grid HorizontalAlignment="Stretch">
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
+				<Image Source="/Assets/attempt4.png" Grid.Column="0" Height="20"/>
 				<TextBlock 
 					Text="Mufflr"
-					Grid.Column="0"
+					Grid.Column="1"
 					VerticalAlignment="Center"
 					FontWeight="Black"
 					FontSize="20"
 					Margin="5 0 0 0"/>
 				<ToggleSwitch 
-					Grid.Column="1"
+					Grid.Column="2"
 					IsChecked="{Binding IsRunning}"
 					HorizontalAlignment="Right"
 					Name="IsRunningToggle"/>
