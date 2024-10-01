@@ -15,4 +15,10 @@ public partial class MainView : UserControl
     {
         base.OnUnloaded(e);
     }
+
+    private void HelpButtonClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var infoWindow = new InfoWindow();
+        infoWindow.Show();
+    }
 }

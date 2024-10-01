@@ -10,7 +10,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        this.ShowInTaskbar = false;
+        //this.ShowInTaskbar = false;
         this.CanResize = false;
 
         this.Closing += (s, e) =>

@@ -4,8 +4,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <FileVersion>0.1.0</FileVersion>
-	  <ApplicationIcon>logo.ico</ApplicationIcon>
+    <FileVersion>0.1.0 sfdfsdf</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

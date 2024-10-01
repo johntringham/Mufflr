@@ -1,0 +1,76 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+		Width="400"
+		Height="300"
+        x:Class="Mufflr.InfoWindow"
+		FontFamily="{StaticResource OverusedGrotesk}"
+	    FontSize="16"
+	    FontWeight="Bold"
+        Title="Mufflr Info"
+		Padding="20">
+
+	<Window.Styles>
+		<Style Selector="HyperlinkButton">
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Foreground" Value="#ff9966"/>
+		</Style>
+
+		<Style Selector="TextBlock">
+			<Setter Property="FontSize" Value="14"/>
+		</Style>
+	</Window.Styles>
+	
+	<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+
+		<StackPanel Orientation="Horizontal"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Center">
+			<Image Source="/Assets/attempt4.png" Height="20" Margin="0 0 10 0"/>
+			<TextBlock
+				Text="Mufflr"
+				Grid.Column="0"
+				VerticalAlignment="Center"
+				FontWeight="Black"
+				FontSize="20"/>
+			<TextBlock Name="VersionDisplay" Text="AAAAAA" VerticalAlignment="Center"/>
+		</StackPanel>
+
+		<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="0 10 0 0" FontSize="14">
+			<Run>Mufflr's aim is to protect your hearing by automatically turning down your computer's volume whenever a loud noise is being played, and then turn the volume back up when it's quiet again.</Run>
+		</TextBlock>
+
+		<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="0 10 0 0" FontSize="14">
+			<Run>Change the "intended volume" and "loudness cap" values to pick settings right for your environment. By default, it's 30 volume and 0.05 cap.</Run>
+		</TextBlock>
+
+		<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="0 10 0 0" FontSize="14">
+			This program is free and
+			<InlineUIContainer>
+				<HyperlinkButton Content="open source" NavigateUri="https://github.com/johntringham/Mufflr"/>
+			</InlineUIContainer>
+			and does no tracking, telemetry, or data collection.
+		</TextBlock>
+
+		<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="0 10 0 0">
+			<Run>Made by </Run>
+			<InlineUIContainer>
+				<HyperlinkButton Content="John Tringham" NavigateUri="https://blog.seedganggames.com/"/>
+			</InlineUIContainer>
+			<Run>using </Run>
+			<InlineUIContainer>
+				<HyperlinkButton Content="Avalonia" NavigateUri="https://avaloniaui.net/"/>
+			</InlineUIContainer>
+			<Run>and </Run>
+			<InlineUIContainer>
+				<HyperlinkButton Content="NAudio" NavigateUri="https://github.com/naudio/NAudio"/>
+			</InlineUIContainer>
+			<Run>.</Run>
+		</TextBlock>
+
+	</StackPanel>
+	
+</Window>

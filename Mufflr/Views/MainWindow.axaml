@@ -7,13 +7,14 @@
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="300"
         x:Class="Mufflr.Views.MainWindow"
         Icon="/Assets/attempt4.ico"
-        Title="Volimit"
+        Title="Mufflr"
 		Width="300"
 		Height="300"
-		ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
         SystemDecorations="Full"
 		>
+	<!--ExtendClientAreaToDecorationsHint="True"-->
+	<!--ExtendClientAreaChromeHints="NoChrome"-->
+
 	<Border BorderBrush="Black" BorderThickness="2">
         <views:MainView />
 	</Border>
